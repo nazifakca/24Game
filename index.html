@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>24Game</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            background-color: rgb(252, 255, 224);
+        }
+
+        .container{
+            margin-top: 180px;
+            color: #223631;
+            text-align: center;
+        }
+
+        .green {
+            background-color: #00c472;
+        }
+        .red {
+            background-color: #b62424;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>24Game</h1>
+        <div id="btn"></div>
+        <span>Count:</span>&nbsp;<span id="counter">0</span>
+    </div>
+
+    <script>
+        const btn = document.getElementById('btn');
+        const counter = document.getElementById('counter');
+        const bombIndex = Math.floor(Math.random() * 25);
+        let count = 0;
+    
+        for(let i = 1; i <= 25; i++) {
+            const button = document.createElement('button');
+            button.style = "width: 50px; height: 50px; margin: 1px;";
+            btn.appendChild(button);
+
+            button.addEventListener('click', function() {
+                if (i === bombIndex) {
+                    button.classList.add('red');
+                    alert('wrong choice :(');
+                    const buttons = document.querySelectorAll('.button');
+                    buttons.forEach(btn => btn.disabled = true);
+
+                    if (confirm('restarting...')){
+                        location.reload();
+                    }
+                    else{
+                        location.reload();
+                    }
+                } else {
+                    button.classList.add('green');
+                    button.disabled = true;
+                    count++;
+                    counter.innerHTML = count;
+
+                    if (count == 24) {
+                        confirm('you won!');
+                        location.reload();
+                    }
+                }
+            });
+
+             if ((i % 5) == 0) {
+                btn.appendChild(document.createElement('br'))
+             }
+        }
+    </script>
+</body>
+</html>
